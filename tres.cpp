@@ -66,8 +66,10 @@ void levelorder(Node* root){
 }
 
 
+
+
 int height(Node* root){
-    
+
     if(!root){
         return 0;
     }
@@ -78,6 +80,41 @@ int height(Node* root){
 
     return 1+ max(left,right);
 
+}
+
+
+
+int ifbalanced(Node* root){
+
+    if(!root){
+        return 0;
+    }
+
+    int l = ifbalanced(root->left);
+    if(l==-1) return -1;
+
+    int r = ifbalanced(root->right);
+    if(r==-1) return -1;
+
+
+    if(abs(l-r) > 1) return -1;
+
+    return 1+max(l,r); 
+
+}
+
+int maxi=0;
+int diameter(Node* root){
+    if(!root) return 0;
+
+    int l = diameter(root->left);
+    int r = diameter(root->right);
+
+    if(l+r>maxi){
+        maxi=l+r;
+    }
+
+    return 1+max(l,r);
 }
 
 
@@ -99,17 +136,30 @@ int main(){
     templ->right = new Node(5);
 
     templ->right->right = new Node(8); 
+    templ->right->right->right = new Node(9); 
 
     tempr->right = new Node(7);
     tempr->left = new Node(6);
 
 
-    inorder(root);cout<<endl;
-    preorder(root);cout<<endl;
-    postorder(root);cout<<endl;
-    levelorder(root);cout<<endl;
-    int h = height(root);
-    cout<<h;
+    // inorder(root);cout<<endl;
+    // preorder(root);cout<<endl;
+    // postorder(root);cout<<endl;
+    // levelorder(root);cout<<endl;
+    // int h = height(root);
+    // cout<<h<<endl;
+
+
+    // int result = ifbalanced(root);
+
+    // if(result==-1) cout<<"unbalannced"<<endl;
+    // else{
+    //     cout<<"Balanced with height "<<result<<endl;
+    // }
+
+    diameter(root);
+    cout<<maxi<<endl;
+
 
 
     return 0;
