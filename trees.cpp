@@ -216,6 +216,45 @@ vector<int> topview(Node* root){
 }
 
 
+vector<int> bottomView(Node* root){
+
+    queue<pair<Node*,int>> q;
+    q.push({root , 0});
+    vector<int> res;
+
+    map<int,int> mp;
+
+    while(!q.empty()){
+        auto temp = q.front();
+        q.pop();
+
+        Node* node = temp.first;
+        int line = temp.second;
+
+        
+        mp[line]=node->data;
+        
+
+        if(node->left){
+            q.push({node->left,line-1});
+        }
+
+        if(node->right){
+            q.push({node->right,line+1});
+        }
+
+    } 
+
+    for(auto it : mp){
+        res.push_back(it.second);
+    }
+
+    return res;
+
+
+}
+
+
 
 
 
@@ -302,7 +341,7 @@ int main(){
     //     cout<<endl;
     // }
 
-    vector<int> ans = topview(root);
+    vector<int> ans = bottomView(root);
     for(auto it : ans){
         cout<<it<<" ";
     }
