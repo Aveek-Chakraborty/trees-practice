@@ -254,6 +254,22 @@ vector<int> bottomView(Node* root){
 
 }
 
+vector<int> dsrv;
+void rightview(Node* root, int level){
+    if(!root) return;
+    if(dsrv.size()==level) dsrv.push_back(root->data);
+    rightview(root->right , level+1);
+    rightview(root->left , level+1);
+}
+
+vector<int> dslv;
+void leftview(Node* root, int level){
+    if(!root) return;
+    if(dslv.size()==level) dslv.push_back(root->data);
+    leftview(root->left , level+1);
+    leftview(root->right , level+1);
+}
+
 
 
 
@@ -341,10 +357,19 @@ int main(){
     //     cout<<endl;
     // }
 
-    vector<int> ans = bottomView(root);
-    for(auto it : ans){
+    rightview(root,0);
+    for(auto it : dsrv){
         cout<<it<<" ";
     }
+
+    cout<<endl;
+
+    leftview(root,0);
+    for(auto it : dslv){
+        cout<<it<<" ";
+    }
+
+
 
 
 
