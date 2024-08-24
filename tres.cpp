@@ -117,6 +117,18 @@ int diameter(Node* root){
     return 1+max(l,r);
 }
 
+int ans = INT_MIN;
+int maximumpathsum(Node* root){
+    if(!root) return 0;
+
+    int l = max(0 , maximumpathsum(root->left));
+    int r = max(0 , maximumpathsum(root->right));
+
+    ans = max(ans, l+r+root->data);
+
+    return max(l,r)+root->data;
+}
+
 
 
 
@@ -142,23 +154,26 @@ int main(){
     tempr->left = new Node(6);
 
 
-    // inorder(root);cout<<endl;
-    // preorder(root);cout<<endl;
-    // postorder(root);cout<<endl;
-    // levelorder(root);cout<<endl;
+    // inorder(root);std::cout<<std::endl;
+    // preorder(root);std::cout<<std::endl;
+    // postorder(root);std::cout<<std::endl;
+    // levelorder(root);std::cout<<std::endl;
     // int h = height(root);
-    // cout<<h<<endl;
+    // std::cout<<h<<std::endl;
 
 
     // int result = ifbalanced(root);
 
-    // if(result==-1) cout<<"unbalannced"<<endl;
+    // if(result==-1) std::cout<<"unbalannced"<<std::endl;
     // else{
-    //     cout<<"Balanced with height "<<result<<endl;
+    //     std::cout<<"Balanced with height "<<result<<std::endl;
     // }
 
-    diameter(root);
-    cout<<maxi<<endl;
+    // diameter(root);
+    // std::cout<<maxi<<std::endl;
+
+    maximumpathsum(root);
+    std::cout<<ans<<endl;
 
 
 
