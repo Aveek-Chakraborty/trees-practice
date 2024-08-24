@@ -136,7 +136,7 @@ bool same(Node* q , Node* p){
     if(!p && !q) return true;
     if(!p ||!q) return false;
 
-    return(p->data == q->data && same(p->left,q->left) && same(p->right,q->right));
+    return (p->data == q->data && same(p->left,q->left) && same(p->right,q->right));
 }
 
 
