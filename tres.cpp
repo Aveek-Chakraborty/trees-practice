@@ -66,9 +66,20 @@ void levelorder(Node* root){
 }
 
 
+int height(Node* root){
+    
+    if(!root){
+        return 0;
+    }
+
+    int left = height(root->left);
+    int right = height(root->right);
 
 
-// xyz
+    return 1+ max(left,right);
+
+}
+
 
 
 
@@ -87,6 +98,8 @@ int main(){
     templ->left = new Node(4);
     templ->right = new Node(5);
 
+    templ->right->right = new Node(8); 
+
     tempr->right = new Node(7);
     tempr->left = new Node(6);
 
@@ -94,11 +107,9 @@ int main(){
     inorder(root);cout<<endl;
     preorder(root);cout<<endl;
     postorder(root);cout<<endl;
-    levelorder(root);
-
-
-    
-
+    levelorder(root);cout<<endl;
+    int h = height(root);
+    cout<<h;
 
 
     return 0;
