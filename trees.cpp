@@ -140,6 +140,43 @@ bool same(Node* q , Node* p){
 }
 
 
+vector<vector<int>> zigzag(Node* root){
+    vector<vector<int>> res;
+    queue<Node*> q;
+    q.push(root);
+
+    bool lefttoright=true;
+
+    while(!q.empty()){
+        
+        int size = q.size();
+        vector<int> row(size);
+
+        for(int i = 0 ; i<size ; i++){
+            Node* temp = q.front();
+            q.pop();
+
+            int index = lefttoright ? i : size-i-1;
+            row[index]=temp->data;
+
+            if(temp->left){
+                q.push(temp->left);
+            }
+
+            if(temp->right){
+                q.push(temp->right);
+            }
+        }
+
+        lefttoright=!lefttoright;
+        res.push_back(row);
+    }
+
+    return res;
+
+}
+
+
 
 
 
@@ -210,11 +247,21 @@ int main(){
 
 
 
-    if(same(root,root2)){
-        cout<<"same tree"<<endl;
-    }
-    else{
-        cout<<"not same tree"<<endl;
+    // if(same(root,root2)){
+    //     cout<<"same tree"<<endl;
+    // }
+    // else{
+    //     cout<<"not same tree"<<endl;
+    // }
+
+
+    vector<vector<int>> ans = zigzag(root);
+
+    for(auto it : ans){
+        for(auto its : it){
+            cout<<its<<" ";
+        }
+        cout<<endl;
     }
 
 
