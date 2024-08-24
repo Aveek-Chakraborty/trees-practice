@@ -118,6 +118,7 @@ int diameter(Node* root){
     return 1+max(l,r);
 }
 
+
 int ans = INT_MIN;
 int maximumpathsum(Node* root){
     if(!root) return 0;
@@ -128,6 +129,14 @@ int maximumpathsum(Node* root){
     ans = max(ans, l+r+root->data);
 
     return max(l,r)+root->data;
+}
+
+
+bool same(Node* q , Node* p){
+    if(!p && !q) return true;
+    if(!p ||!q) return false;
+
+    return(p->data == q->data && same(p->left,q->left) && same(p->right,q->right));
 }
 
 
@@ -155,6 +164,28 @@ int main(){
     tempr->left = new Node(6);
 
 
+
+    Node* root2 = new Node(1);
+    root2->left = new Node(2);
+    root2->right = new Node(3);
+
+    Node* templ2 =  root2->left;
+    Node* tempr2 = root2->right;
+
+    templ2->left = new Node(4);
+    templ2->right = new Node(5);
+
+    templ2->right->right = new Node(8); 
+    templ2->right->right->right = new Node(9); 
+
+    tempr2->right = new Node(7);
+    tempr2->left = new Node(6);
+
+
+
+
+    
+
     // inorder(root);std::cout<<std::endl;
     // preorder(root);std::cout<<std::endl;
     // postorder(root);std::cout<<std::endl;
@@ -173,8 +204,18 @@ int main(){
     // diameter(root);
     // std::cout<<maxi<<std::endl;
 
-    maximumpathsum(root);
-    cout<<ans<<endl;
+    // maximumpathsum(root);
+    // cout<<ans<<endl;
+
+
+
+
+    if(same(root,root2)){
+        cout<<"same tree"<<endl;
+    }
+    else{
+        cout<<"not same tree"<<endl;
+    }
 
 
 
