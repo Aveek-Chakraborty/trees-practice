@@ -82,6 +82,31 @@ Node* deletion(Node* head, int pos){
 }
 
 
+Node* updation(Node* head,int pos,int val){
+    Node* psd = head;
+    for(int i=0 ; i<pos ; i++){
+        psd=psd->next;
+    }
+    psd->val=val;
+
+    return head;
+}
+
+
+Node* reverse(Node* head){
+    if(!head || !head->next){
+        return head;
+    }
+
+    Node* newhead = reverse(head->next);
+    Node* front = head->next;
+    front->next=head;
+    head->next=nullptr;
+
+    return newhead;
+}
+
+
 int main(){
 
     Node* head= new Node(1);
@@ -111,13 +136,15 @@ int main(){
     // display(head);
 
 
-    head=deletion(head , 3);
-    display(head);
+    // head=deletion(head , 3);
+    // display(head);
 
 
+    // head = updation(head,7,99);
+    // display(head);
 
-
-
+    // head = reverse(head);
+    // display(head);
 
     return 0;
 }
