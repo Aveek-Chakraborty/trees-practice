@@ -134,6 +134,29 @@ bool detectloop(Node* head ){
     return false;
 }
 
+Node* loopstart(Node* head ){
+    Node* fast = head;
+    Node* slow = head;
+
+    while(fast && fast->next && fast->next->next){
+        fast=fast->next->next;
+        slow=slow->next;
+
+        if(fast==slow){
+            slow=head;
+
+            while(slow!=fast){
+                slow=slow->next;
+                fast=fast->next;
+            }
+
+            return slow;
+
+        }
+    }
+
+    return nullptr;
+}
 
 
 
@@ -179,11 +202,18 @@ int main(){
 
     // cout<<middle(head);
 
-    if(detectloop(head)){
-        cout<<"True";
-    }else{
-        cout<<"False";
-    }
+    // if(detectloop(head)){
+    //     cout<<"True";
+    // }else{
+    //     cout<<"False";
+    // }
+
+    // Node* ans = loopstart(head);
+    // if(ans){
+    //     cout<<ans->val;
+    // }else{
+    //     cout<<"loop not present";
+    // }
 
     return 0;
 }
