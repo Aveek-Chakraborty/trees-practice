@@ -106,6 +106,34 @@ Node* reverse(Node* head){
     return newhead;
 }
 
+int middle(Node* head ){
+    Node* fast = head;
+    Node* slow = head;
+
+    while(fast && fast->next && fast->next->next){
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+
+    return slow->val;
+}
+
+bool detectloop(Node* head ){
+    Node* fast = head;
+    Node* slow = head;
+
+    while(fast && fast->next && fast->next->next){
+        fast=fast->next->next;
+        slow=slow->next;
+
+        if(fast==slow){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 
 
@@ -128,6 +156,7 @@ int main(){
     head4->next=head5;
     head5->next=head6;
     head6->next=head7;
+    // head7->next=head4;
 
 
     // display(head);
@@ -147,6 +176,14 @@ int main(){
 
     // head = reverse(head);
     // display(head);
+
+    // cout<<middle(head);
+
+    if(detectloop(head)){
+        cout<<"True";
+    }else{
+        cout<<"False";
+    }
 
     return 0;
 }
