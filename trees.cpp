@@ -271,6 +271,43 @@ void leftview(Node* root, int level){
 }
 
 
+vector<vector<int>> verticalorder(Node* root){
+
+    queue<pair<Node*,int>> q;
+    q.push({root , 0});
+    vector<vector<int>> res;
+
+    map<int,vector<int>> mp;
+
+    while(!q.empty()){
+        auto temp = q.front();
+        q.pop();
+
+        Node* node = temp.first;
+        int line = temp.second;
+
+        mp[line].push_back(node->data);
+
+        if(node->left){
+            q.push({node->left,line-1});
+        }
+
+        if(node->right){
+            q.push({node->right,line+1});
+        }
+
+    } 
+
+    for(auto it : mp){
+        res.push_back(it.second);
+    }
+
+    return res;
+
+
+}
+
+
 
 
 
@@ -357,16 +394,26 @@ int main(){
     //     cout<<endl;
     // }
 
-    rightview(root,0);
-    for(auto it : dsrv){
-        cout<<it<<" ";
-    }
+    // rightview(root,0);
+    // for(auto it : dsrv){
+    //     cout<<it<<" ";
+    // }
 
-    cout<<endl;
+    // cout<<endl;
 
-    leftview(root,0);
-    for(auto it : dslv){
-        cout<<it<<" ";
+    // leftview(root,0);
+    // for(auto it : dslv){
+    //     cout<<it<<" ";
+    // }
+
+
+    vector<vector<int>> ans = verticalorder(root);
+
+    for(auto it : ans){
+        for(auto its : it){
+            cout<<its<<" ";
+        }
+        cout<<endl;
     }
 
 
