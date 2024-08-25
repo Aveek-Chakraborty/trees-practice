@@ -307,7 +307,39 @@ vector<vector<int>> verticalorder(Node* root){
 
 }
 
+Node *solve(Node *root)
+{
+    if (!root)
+        return nullptr;
 
+    Node *left = solve(root->left);
+    Node *right = solve(root->right);
+
+    root->left = right;
+    root->right = left;
+
+    return root;
+}
+Node *invertTree(Node *root)
+{
+    return solve(root);
+}
+
+
+
+bool solve(Node *left, Node *right)
+{
+    if (!left || !right)
+        return left == right;
+
+    if (left->data != right->data)
+        return false;
+    return (solve(left->left, right->right) && solve(left->right, right->left));
+}
+bool isSymmetric(Node *root)
+{
+    return !root || solve(root->left, root->right);
+}
 
 
 
