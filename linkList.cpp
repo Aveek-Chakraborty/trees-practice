@@ -158,6 +158,50 @@ Node* loopstart(Node* head ){
     return nullptr;
 }
 
+bool pallindrome(Node* head){
+    Node* slow=head;
+    Node* fast=head;
+
+    while(fast&&fast->next&&fast->next->next){
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+
+    slow=reverse(slow);
+
+    Node* temp = head;
+    while(temp && slow){
+        if(temp->val != slow->val){
+            return false;
+        }
+        slow=slow->next;
+        temp=temp->next;
+    }
+
+    return true;
+}
+
+Node* intersect(Node* h1, Node*h2){
+
+    Node* th1=h1;
+    Node* th2=h2;
+    
+    while(h1!=h2){
+        h1=h1->next;
+        h2=h2->next;
+
+        if(!h1){
+            h1=th2;
+        }
+
+        if(!h2){
+            h2=th1;
+        }
+    }
+
+    return h1;
+}
+
 
 
 int main(){
@@ -165,11 +209,17 @@ int main(){
     Node* head= new Node(1);
     Node* head1= new Node(2);
     Node* head2= new Node(3);
-    Node* head3= new Node(4);
-    Node* head4= new Node(5);
-    Node* head5= new Node(6);
-    Node* head6= new Node(7);
-    Node* head7= new Node(8);
+    Node* head3= new Node(99);
+    Node* head4= new Node(4);
+    Node* head5= new Node(3);
+    Node* head6= new Node(2);
+    Node* head7= new Node(1);
+
+    Node* head8= new Node(5);
+    Node* head9= new Node(6);
+    Node* head10= new Node(7);
+    Node* head11= new Node(8);
+    Node* head12= new Node(10);
 
 
     head->next=head1;
@@ -180,6 +230,13 @@ int main(){
     head5->next=head6;
     head6->next=head7;
     // head7->next=head4;
+
+
+    head8->next=head9;
+    head9->next=head10;
+    head10->next=head3;
+    head11->next=head8;
+    head12->next=head11;
 
 
     // display(head);
@@ -214,6 +271,15 @@ int main(){
     // }else{
     //     cout<<"loop not present";
     // }
+
+    // if(pallindrome(head)){
+    //     cout<<"yes";
+    // }else{
+    //     cout<<"no";
+    // }
+
+    Node* ans = intersect(head, head12);
+    cout<<ans->val;
 
     return 0;
 }
