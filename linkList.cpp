@@ -203,6 +203,52 @@ Node* intersect(Node* h1, Node*h2){
 }
 
 
+Node* segregate(Node *head) {
+        
+        // Add code here
+        int counts[3] = {0};
+        
+        Node *cur = head;
+        while (cur != NULL)
+        {
+            counts[cur->val] += 1;
+            cur = cur->next;
+        }
+        
+        cur = head;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < counts[i]; j++)
+            {
+                cur->val = i;
+                cur = cur->next;
+            }
+        }
+        return head;
+}
+
+Node *sortList(Node *head)
+{
+    vector<int> v;
+    Node *temp = head;
+
+    while (temp)
+    {
+        v.push_back(temp->val);
+        temp = temp->next;
+    }
+
+    temp = head;
+    sort(v.begin(), v.end());
+
+    for (auto it : v)
+    {
+        temp->val = it;
+        temp = temp->next;
+    }
+
+    return head;
+}
 
 int main(){
 
@@ -278,8 +324,8 @@ int main(){
     //     cout<<"no";
     // }
 
-    Node* ans = intersect(head, head12);
-    cout<<ans->val;
+    // Node* ans = intersect(head, head12);
+    // cout<<ans->val;
 
     return 0;
 }
